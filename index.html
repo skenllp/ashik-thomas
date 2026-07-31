@@ -212,8 +212,9 @@
     <!-- ---------- HERO ---------- -->
     <section id="hero" class="scene scene--screen scene--hero" aria-busy="true">
       <picture class="section-bg">
+        <source id="heroDesktopSource" media="(min-width: 768px)" srcset="assets/images/cover/cover.jpg">
         <img id="heroImg" class="section-bg" src="assets/images/hero/hero-bg.jpg"
-          data-candidates="assets/images/hero/hero-bg.jpg" alt="Ashik Thomas &amp; Irine Mariya Anto" width="1080"
+          data-candidates="assets/images/cover/cover.jpg, assets/images/hero/hero-bg.jpg" alt="Ashik Thomas &amp; Irine Mariya Anto" width="1080"
           height="1920" decoding="async" fetchpriority="high">
       </picture>
 
@@ -270,15 +271,16 @@
           </li>
           <li class="fact reveal" data-delay="3">
             <svg class="ico" aria-hidden="true">
-              <use href="#i-pin"></use>
+              <use href="#i-church"></use>
             </svg>
             <span class="fact-k">Venue</span>
             <span class="fact-v">Immanuel Mar Thoma Church</span>
             <span class="fact-s">Neeleswaram, Kottarakkara</span>
           </li>
           <li class="fact reveal" data-delay="4">
-            <svg class="ico" aria-hidden="true">
-              <use href="#i-church"></use>
+            
+             <svg class="ico" aria-hidden="true">
+              <use href="#i-pin"></use>
             </svg>
             <span class="fact-k">Reception</span>
             <span class="fact-v">Jubilee Mandiram Auditorium</span>
@@ -741,6 +743,22 @@
       }
     </style>
   </noscript>
+
+  <!-- Background Music Audio & Floating Toggle Button -->
+  <audio id="bgAudio" src="music.mp3" loop preload="auto"></audio>
+
+  <button id="audioBtn" class="audio-disc" type="button" aria-label="Play music" aria-pressed="false" hidden>
+    <span class="audio-disc__glow" aria-hidden="true"></span>
+    <span class="audio-disc__ring" aria-hidden="true"></span>
+    <span class="audio-disc__platter" aria-hidden="true">
+      <span class="audio-disc__grooves"></span>
+      <span class="audio-disc__hub"><span class="audio-disc__mono">A&amp;I</span></span>
+    </span>
+    <span class="audio-disc__icon" aria-hidden="true">
+      <svg class="audio-disc__play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="audio-disc__pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    </span>
+  </button>
 
   <script src="js/particles.js" defer></script>
   <script src="js/main.js" defer></script>
