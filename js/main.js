@@ -210,7 +210,7 @@
 
   var HERO_CANDIDATES = (
     (heroImg && heroImg.getAttribute('data-candidates')) ||
-    'hero.png'
+    'mobile.png'
   ).split(',').map(function (s) { return s.trim(); }).filter(Boolean);
 
   function loadAndDecodeUrl(url) {
@@ -301,7 +301,7 @@
       })
       .catch(function () {
         /* Absolute fallback — paint the PNG rather than stall forever */
-        if (heroImg) heroImg.src = 'hero.png';
+        if (heroImg) heroImg.src = 'mobile.png';
         heroIsReady = true;
         return false;
       });

@@ -34,9 +34,9 @@
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Marcellus&family=Jost:wght@200;300;400;500&display=swap">
 
   <!-- Critical media only: cover, intro video, hero -->
-  <link rel="preload" as="image" href="assets/images/cover/cover.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/cover/cover.jpg" media="(min-width: 768px)" fetchpriority="high">
+  <link rel="preload" as="image" href="mobile.png" media="(max-width: 767px)" fetchpriority="high">
   <link rel="preload" as="video" href="assets/video/reveal.mp4" type="video/mp4">
-  <link rel="preload" as="image" href="assets/images/hero/hero-bg.jpg">
 
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/scenes.css">
@@ -213,8 +213,8 @@
     <section id="hero" class="scene scene--screen scene--hero" aria-busy="true">
       <picture class="section-bg">
         <source id="heroDesktopSource" media="(min-width: 768px)" srcset="assets/images/cover/cover.jpg">
-        <img id="heroImg" class="section-bg" src="assets/images/hero/hero-bg.jpg"
-          data-candidates="assets/images/cover/cover.jpg, assets/images/hero/hero-bg.jpg" alt="Ashik Thomas &amp; Irine Mariya Anto" width="1080"
+        <img id="heroImg" class="section-bg" src="mobile.png"
+          data-candidates="mobile.png, assets/images/hero/hero-bg.jpg, assets/images/cover/cover.jpg" alt="Ashik Thomas &amp; Irine Mariya Anto" width="1080"
           height="1920" decoding="async" fetchpriority="high">
       </picture>
 
@@ -244,6 +244,14 @@
             <span class="divider-line"></span>
           </div>
         </div>
+
+        <blockquote class="verse-card reveal" data-delay="1">
+          <svg class="ico verse-card__icon" aria-hidden="true">
+            <use href="#i-bible"></use>
+          </svg>
+          <p class="verse-en">“Love is patient, love is kind. It always protects, always trusts, always hopes, always perseveres. Love never fails.”</p>
+          <cite class="verse-ref">— 1 Corinthians 13:4, 7–8 —</cite>
+        </blockquote>
 
         <p class="lede reveal" data-delay="1">
           With the blessings of God and our beloved families, Mr. Thomas George &amp; Mrs. Suja Thomas
@@ -278,13 +286,20 @@
             <span class="fact-s">Neeleswaram, Kottarakkara</span>
           </li>
           <li class="fact reveal" data-delay="4">
-            
-             <svg class="ico" aria-hidden="true">
+            <svg class="ico" aria-hidden="true">
               <use href="#i-pin"></use>
             </svg>
             <span class="fact-k">Reception</span>
             <span class="fact-v">Jubilee Mandiram Auditorium</span>
             <span class="fact-s">Kottarakkara · 5:30 PM</span>
+          </li>
+          <li class="fact reveal" data-delay="5">
+            <svg class="ico" aria-hidden="true">
+              <use href="#i-phone"></use>
+            </svg>
+            <span class="fact-k">RSVP / Contact</span>
+            <span class="fact-v"><a href="https://wa.me/917034097841" target="_blank" rel="noopener" class="fact-link">+91 70340 97841</a></span>
+            <span class="fact-s">Click to WhatsApp / Call</span>
           </li>
         </ul>
 
@@ -710,6 +725,14 @@
         <p class="footer-names">Ashik Thomas <span>&amp;</span> Irine Mariya Anto</p>
         <p class="footer-date">12 October 2026 · Kottarakkara</p>
         <p class="footer-fine">With Love &amp; Prayers</p>
+        <div class="footer-whatsapp" style="margin-top: 24px;">
+          <a class="btn btn--gold" target="_blank" rel="noopener" href="https://wa.me/917034097841?text=Greetings!%20I%20would%20like%20to%20RSVP%20for%20the%20wedding%20of%20Ashik%20%26%20Irine.">
+            <svg class="ico" aria-hidden="true" style="width: 18px; height: 18px; display: inline-block; vertical-align: middle; margin-right: 6px;">
+              <use href="#i-phone"></use>
+            </svg>
+            RSVP on WhatsApp (+91 70340 97841)
+          </a>
+        </div>
       </div>
     </footer>
 
