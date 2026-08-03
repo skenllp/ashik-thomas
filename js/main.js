@@ -708,5 +708,101 @@
     e.preventDefault();
     t.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
+  /* ---------------------------------------------------------
+     11 · RSVP form
+     --------------------------------------------------------- */
+  (function rsvpInit() {
+    var form = document.getElementById('rsvpForm');
+    var submitBtn = document.getElementById('rsvpSubmit');
+    if (!form) return;
+
+    /* ---------- validation ---------- */
+    function validateField(input) {
+      if (!input.required) return true;
+      var ok = input.value.trim().length > 0;
+      input.classList.toggle('is-error', !ok);
+      return ok;
+    }
+
+    /* clear error on input */
+    form.addEventListener('input', function (e) {
+      if (e.target.classList.contains('is-error')) {
+        e.target.classList.remove('is-error');
+      }
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      /* Validate required fields */
+      var name = document.getElementById('rsvpName');
+      var mobile = document.getElementById('rsvpMobile');
+      var allValid = true;
+
+      if (!validateField(name)) { allValid = false; name.focus(); }
+      if (!validateField(mobile)) { if (allValid) mobile.focus(); allValid = false; }
+
+      if (!allValid) return;
+
+      /* Gather data */
+      var data = {
+        name: name.value.trim(),
+        mobile: mobile.value.trim(),
+        email: (document.getElementById('rsvpEmail') || {}).value || '',
+        side: (document.getElementById('rsvpSide') || {}).value || '',
+        attend: '',
+        guests: (document.getElementById('rsvpGuests') || {}).value || '1'
+      };
+
+      var attendRadios = form.querySelectorAll('input[name="attend"]');
+      for (var i = 0; i < attendRadios.length; i++) {
+        if (attendRadios[i].checked) { data.attend = attendRadios[i].value; break; }
+      }
+
+      /* Show sending state */
+      if (submitBtn) {
+        submitBtn.classList.add('is-sending');
+        submitBtn.textContent = 'Sending…';
+      }
+
+      /* ── Google Sheet endpoint ──
+         Replace this URL with your deployed Google Apps Script web app URL.
+         Steps: Extensions → Apps Script → paste the doPost code → Deploy → Web app
+                → set "Anyone" access → copy the URL below */
+      var GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyFPqYjHB09WYccSFWrtPGTC29ICirvgoR3fG8L3cEY46jHjNKArIiYtjxON7800970/exec';
+
+      function showSuccess() {
+        /* Change button to Thank You state */
+        if (submitBtn) {
+          submitBtn.classList.remove('is-sending');
+          submitBtn.innerHTML = '<svg class="ico" aria-hidden="true"><use href="#i-dove"></use></svg> Thank You!';
+          submitBtn.classList.add('is-success');
+          submitBtn.disabled = true;
+        }
+        /* Disable all inputs so user sees what they submitted */
+        var inputs = form.querySelectorAll('input, select');
+        for (var i = 0; i < inputs.length; i++) {
+          inputs[i].disabled = true;
+        }
+      }
+
+      /* POST to Google Sheet */
+      fetch(GOOGLE_SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(function () { showSuccess(); })
+      .catch(function () {
+        /* Reset button on failure */
+        if (submitBtn) {
+          submitBtn.classList.remove('is-sending');
+          submitBtn.textContent = 'Send RSVP';
+        }
+        alert('Something went wrong. Please try again.');
+      });
+    });
+  })();
 
 })();
